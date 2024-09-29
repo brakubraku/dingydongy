@@ -1,0 +1,376 @@
+.float-container {
+    border: 3px solid #fff;
+    padding: 20px;
+}
+
+.float-child {
+    width: 50%;
+    float: left;
+    padding: 20px;
+    border: 2px solid red;
+}
+
+.note-container {
+    display: flex;
+    flex: 8 0 0
+}
+
+.note-content {
+    /* filter: blur(5px); */
+    padding-top: 5px;
+}
+
+.text-note-container {
+    flex: 10 0 0;
+    /* border: 1px solid magenta; */
+    text-align: left;
+    border-bottom: 1px solid #e1e1e1;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}
+
+.text-note {
+    margin-left: 10px
+}
+
+.text-note-right-panel {
+    flex: 1;
+    /* border: 1px solid magenta; */
+    text-align: left
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.0;
+    }
+}
+
+.reactions-container {
+    margin-top: auto;
+    animation: blink 1s linear 2;
+    /* position: absolute;
+    bottom: 0px; */
+}
+
+.profile-pic {
+    height: 50px;
+    width: 50px;
+    border-radius: 70%;
+    margin-right: 20px;
+    margin-top: 15px;
+    cursor: pointer;
+    background-color: grey;
+
+}
+
+.profile-page .note-container .embedded-event .profile-pic {
+    height: 50px;
+    width: 50px;
+    border-radius: 70%;
+    margin-right: 20px;
+    margin-top: 15px;
+    cursor: pointer;
+    display: initial;
+    position: initial;
+    background-color: grey;
+}
+
+.main-container {
+    display: flex
+}
+
+.left-panel {
+    flex: 2 0 0;
+    /* background-color: black; */
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    /* justify-content: center; */
+    padding-top: 40px;
+}
+
+.left-panel-item {
+    width: 100px;
+}
+
+.middle-panel {
+    flex: 6 0 0;
+    overflow: hidden;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 30px;
+}
+
+.right-panel {
+    flex: 2 0 0;
+}
+
+.notes-container {
+    /* flex: 6 0 0;
+    overflow: scroll;
+    margin-left: 15px; */
+}
+
+.left-panel-item button {
+    background-color: white;
+    color: black;
+    /* border: 2px solid #e7e7e7; */
+    width: 100%;
+    text-align: left;
+}
+
+.left-panel-item button:hover {
+
+    background-color: #e7e7e7;
+}
+
+#username {
+    color: #9b9ba5;
+    font-size: 12px;
+}
+
+#display-name {
+    margin-left: 5px;
+    color: #9e737b;
+    font-size: 12px;
+}
+
+#note-age {
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+.profile {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 20px;
+}
+
+.profile .profile-pic {
+    height: 100px;
+    width: 100px;
+    border-radius: 70%;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-top: 0px;
+}
+
+.profile .info-container {
+    flex: 8;
+}
+
+.profile .about {
+    margin-top: 20px
+}
+
+.thread-container .note {
+    margin-left: 30px;
+}
+
+.thread-container .note-no-parent {
+    margin-left: 0px;
+}
+
+.thread-container .reply {
+    margin-left: 100px;
+}
+
+.text-note-properties {
+    display: flex;
+    font-size: 14px;
+    padding-top: 5px;
+}
+
+.replies-count {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.button-back {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.profile-page .profile-pic-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-page .profile-pic-container .follow-button-container {
+    flex: 1;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.profile-page .profile-pic-container .names {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-page .note-container .profile-pic {
+    display: none;
+}
+
+.profile-page .banner {
+    text-align: center;
+}
+
+.profile-page .profile-pic {
+    height: 150px;
+    width: 150px;
+    border-radius: 70%;
+    margin-right: 20px;
+    margin-top: 15px;
+    position: relative;
+    top: -90px;
+    left: 10px;
+}
+
+.profile-page .profile-pic-default {
+    height: 150px;
+    width: 150px;
+    border-radius: 70%;
+    margin-right: 20px;
+    margin-top: 15px;
+    position: relative;
+    top: -90px;
+    left: 10px;
+    background-color: white
+}
+
+.profile-page #username {
+    font-size: 45px;
+}
+
+.profile-page .note-container #username {
+    display: none;
+}
+
+.profile-page .banner-pic {
+    width: 600px;
+    object-fit: scale-down;
+}
+
+.profile-page .banner-pic-default {
+    height: 200px;
+    background-color: rgba(218, 86, 26, 0.664);
+}
+
+.profile-page .profile-about {
+    position: relative;
+    top: -40px;
+    font-weight: bold;
+    font-style: italic;
+    padding-bottom: 20px;
+    border-bottom: 1px solid grey;
+}
+
+.search-box {
+    /* text-align: center; */
+    margin-bottom: 20px;
+    font-size: 20px;
+    display: flex;
+}
+
+.search-box-button {
+    margin-left: 10px;
+}
+
+.input-xo {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid gray
+}
+
+.link-pic {
+    max-width: 200px;
+}
+
+.follow-button {
+    margin-top: 10px;
+}
+
+.remove-element {
+    display: none;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.visible {}
+
+.load-next-container {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+
+.load-next {
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    background: burlywood;
+    padding: 5px;
+}
+
+.load-previous-container {
+    text-align: center;
+    margin-bottom: 20px;
+
+}
+
+.load-previous {
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    background: burlywood;
+    padding: 5px;
+}
+
+.embedded-profile {
+    display: flex;
+    padding: 10px;
+    background-color: #fbfbe9;
+}
+
+.embedded-profile .profile-pic {
+    display: flex;
+    margin-top: 0px;
+    margin-right: 10px;
+}
+
+.embedded-profile .info-container .name {
+    font-weight: bold;
+}
+
+.embedded-event {
+    background-color: beige;
+}
+
+.profile-page .note-container .embedded-profile .profile-pic {
+    height: 50px;
+    width: 50px;
+    border-radius: 70%;
+    margin-right: 20px;
+    cursor: pointer;
+    display: initial;
+    position: initial;
+    background-color: grey;
+}
+
+#left-arrow {
+    width: 40px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.like-reaction {
+    color: purple;
+}
