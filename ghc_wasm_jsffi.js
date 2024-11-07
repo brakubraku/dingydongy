@@ -49,46 +49,51 @@ class JSValManager {
   }
 }
 
-// A simple & fast setImmediate() implementation for browsers. It's
-// not a drop-in replacement for node.js setImmediate() because:
-// 1. There's no clearImmediate(), and setImmediate() doesn't return
-//    anything
-// 2. There's no guarantee that callbacks scheduled by setImmediate()
-//    are executed in the same order (in fact it's the opposite lol),
-//    but you are never supposed to rely on this assumption anyway
-class SetImmediate {
-  #fs = [];
-  #mc = new MessageChannel();
-
-  constructor() {
-    this.#mc.port1.addEventListener("message", () => {
-      this.#fs.pop()();
-    });
-    this.#mc.port1.start();
-  }
-
-  setImmediate(cb, ...args) {
-    this.#fs.push(() => cb(...args));
-    this.#mc.port2.postMessage(undefined);
-  }
-}
-
 // The actual setImmediate() to be used. This is a ESM module top
 // level binding and doesn't pollute the globalThis namespace.
-let setImmediate;
-if (globalThis.setImmediate) {
-  // node.js, bun
-  setImmediate = globalThis.setImmediate;
-} else {
-  try {
-    // deno
-    setImmediate = (await import("node:timers")).setImmediate;
-  } catch {
-    // browsers
-    const sm = new SetImmediate();
-    setImmediate = (cb, ...args) => sm.setImmediate(cb, ...args);
+const setImmediate = await (async () => {
+  // node, bun, or other scripts might have set this up in the browser
+  if (globalThis.setImmediate) {
+    return globalThis.setImmediate;
   }
-}
+
+  // deno
+  try {
+    return (await import("node:timers")).setImmediate;
+  } catch {}
+
+  // https://developer.mozilla.org/en-US/docs/Web/API/Scheduler/postTask
+  if (globalThis.scheduler) {
+    return (cb, ...args) => scheduler.postTask(() => cb(...args));
+  }
+
+  // A simple & fast setImmediate() implementation for browsers. It's
+  // not a drop-in replacement for node.js setImmediate() because:
+  // 1. There's no clearImmediate(), and setImmediate() doesn't return
+  //    anything
+  // 2. There's no guarantee that callbacks scheduled by setImmediate()
+  //    are executed in the same order (in fact it's the opposite lol),
+  //    but you are never supposed to rely on this assumption anyway
+  class SetImmediate {
+    #fs = [];
+    #mc = new MessageChannel();
+
+    constructor() {
+      this.#mc.port1.addEventListener("message", () => {
+        this.#fs.pop()();
+      });
+      this.#mc.port1.start();
+    }
+
+    setImmediate(cb, ...args) {
+      this.#fs.push(() => cb(...args));
+      this.#mc.port2.postMessage(undefined);
+    }
+  }
+
+  const sm = new SetImmediate();
+  return (cb, ...args) => sm.setImmediate(cb, ...args);
+})();
 
 export default (__exports) => {
 const __ghc_wasm_jsffi_jsval_manager = new JSValManager();
@@ -98,12 +103,12 @@ newJSVal: (v) => __ghc_wasm_jsffi_jsval_manager.newJSVal(v),
 getJSVal: (k) => __ghc_wasm_jsffi_jsval_manager.getJSVal(k),
 freeJSVal: (k) => __ghc_wasm_jsffi_jsval_manager.freeJSVal(k),
 scheduleWork: () => setImmediate(__exports.rts_schedulerLoop),
-ZC0ZCjsaddlezmwasmzm0zi0zi0zi0zmcaef98e9541172063c66ea2b66862c92f3bfa11316ffb2ad0b2d82854c80a93dZCLanguageziJavascriptziJSaddleziWasmZC: ($1,$2) => ((new TextDecoder('utf-8', {fatal: true})).decode(new Uint8Array(__exports.memory.buffer, $1, $2))),
-ZC1ZCjsaddlezmwasmzm0zi0zi0zi0zmcaef98e9541172063c66ea2b66862c92f3bfa11316ffb2ad0b2d82854c80a93dZCLanguageziJavascriptziJSaddleziWasmZC: ($1,$2,$3) => ((new TextEncoder()).encodeInto($1, new Uint8Array(__exports.memory.buffer, $2, $3)).written),
-ZC2ZCjsaddlezmwasmzm0zi0zi0zi0zmcaef98e9541172063c66ea2b66862c92f3bfa11316ffb2ad0b2d82854c80a93dZCLanguageziJavascriptziJSaddleziWasmZC: ($1) => ($1.length),
-ZC3ZCjsaddlezmwasmzm0zi0zi0zi0zmcaef98e9541172063c66ea2b66862c92f3bfa11316ffb2ad0b2d82854c80a93dZCLanguageziJavascriptziJSaddleziWasmZC: async ($1,$2,$3) => (new Function('processResult','readBatch',`(()=>{${$1}})()`)($2, $3)),
-ZC5ZCjsaddlezmwasmzm0zi0zi0zi0zmcaef98e9541172063c66ea2b66862c92f3bfa11316ffb2ad0b2d82854c80a93dZCLanguageziJavascriptziJSaddleziWasmZC: ($1) => (() => __exports.ghczuwasmzujsffiZC4ZCjsaddlezmwasmzm0zi0zi0zi0zmcaef98e9541172063c66ea2b66862c92f3bfa11316ffb2ad0b2d82854c80a93dZCLanguageziJavascriptziJSaddleziWasmZC($1)),
-ZC7ZCjsaddlezmwasmzm0zi0zi0zi0zmcaef98e9541172063c66ea2b66862c92f3bfa11316ffb2ad0b2d82854c80a93dZCLanguageziJavascriptziJSaddleziWasmZC: ($1) => ((a1) => __exports.ghczuwasmzujsffiZC6ZCjsaddlezmwasmzm0zi0zi0zi0zmcaef98e9541172063c66ea2b66862c92f3bfa11316ffb2ad0b2d82854c80a93dZCLanguageziJavascriptziJSaddleziWasmZC($1,a1)),
+ZC0ZCjsaddlezmwasmzm0zi0zi0zi0zma301497ad78f50f7109e533af9926ff37a9d54bf6962fdbf05b92e341d0d4300ZCLanguageziJavascriptziJSaddleziWasmZC: ($1,$2) => ((new TextDecoder('utf-8', {fatal: true})).decode(new Uint8Array(__exports.memory.buffer, $1, $2))),
+ZC1ZCjsaddlezmwasmzm0zi0zi0zi0zma301497ad78f50f7109e533af9926ff37a9d54bf6962fdbf05b92e341d0d4300ZCLanguageziJavascriptziJSaddleziWasmZC: ($1,$2,$3) => ((new TextEncoder()).encodeInto($1, new Uint8Array(__exports.memory.buffer, $2, $3)).written),
+ZC2ZCjsaddlezmwasmzm0zi0zi0zi0zma301497ad78f50f7109e533af9926ff37a9d54bf6962fdbf05b92e341d0d4300ZCLanguageziJavascriptziJSaddleziWasmZC: ($1) => ($1.length),
+ZC3ZCjsaddlezmwasmzm0zi0zi0zi0zma301497ad78f50f7109e533af9926ff37a9d54bf6962fdbf05b92e341d0d4300ZCLanguageziJavascriptziJSaddleziWasmZC: async ($1,$2,$3) => (new Function('processResult','readBatch',`(()=>{${$1}})()`)($2, $3)),
+ZC5ZCjsaddlezmwasmzm0zi0zi0zi0zma301497ad78f50f7109e533af9926ff37a9d54bf6962fdbf05b92e341d0d4300ZCLanguageziJavascriptziJSaddleziWasmZC: ($1) => (() => __exports.ghczuwasmzujsffiZC4ZCjsaddlezmwasmzm0zi0zi0zi0zma301497ad78f50f7109e533af9926ff37a9d54bf6962fdbf05b92e341d0d4300ZCLanguageziJavascriptziJSaddleziWasmZC($1)),
+ZC7ZCjsaddlezmwasmzm0zi0zi0zi0zma301497ad78f50f7109e533af9926ff37a9d54bf6962fdbf05b92e341d0d4300ZCLanguageziJavascriptziJSaddleziWasmZC: ($1) => ((a1) => __exports.ghczuwasmzujsffiZC6ZCjsaddlezmwasmzm0zi0zi0zi0zma301497ad78f50f7109e533af9926ff37a9d54bf6962fdbf05b92e341d0d4300ZCLanguageziJavascriptziJSaddleziWasmZC($1,a1)),
 ZC0ZCghczminternalZCGHCziInternalziWasmziPrimziExportsZC: ($1,$2) => ($1.reject(new WebAssembly.RuntimeError($2))),
 ZC18ZCghczminternalZCGHCziInternalziWasmziPrimziExportsZC: ($1,$2) => ($1.resolve($2)),
 ZC19ZCghczminternalZCGHCziInternalziWasmziPrimziExportsZC: ($1) => ($1.resolve()),

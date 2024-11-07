@@ -12,19 +12,24 @@
 
 .note-container {
     display: flex;
-    flex: 8 0 0
+    flex: 8 0 0;
+
+    background: #d3d3d3a3;;
+    border-radius: 15px;
+    padding-left: 10px;
+    margin-bottom:10px;
+    border: 1px solid black;
+    overflow:scroll;
 }
 
 .note-content {
-    /* filter: blur(5px); */
     padding-top: 5px;
 }
 
 .text-note-container {
     flex: 10 0 0;
-    /* border: 1px solid magenta; */
     text-align: left;
-    border-bottom: 1px solid #e1e1e1;
+    /* border-bottom: 1px solid #e1e1e1; */
     overflow: scroll;
     display: flex;
     flex-direction: column;
@@ -39,7 +44,6 @@
 
 .text-note-right-panel {
     flex: 1;
-    /* border: 1px solid magenta; */
     text-align: left
 }
 
@@ -52,8 +56,6 @@
 .reactions-container {
     margin-top: auto;
     animation: blink 1s linear 2;
-    /* position: absolute;
-    bottom: 0px; */
 }
 
 .profile-pic {
@@ -85,43 +87,40 @@
 
 .left-panel {
     flex: 2 0 0;
-    /* background-color: black; */
     display: flex;
     flex-direction: column;
 
     align-items: center;
-    /* justify-content: center; */
     padding-top: 40px;
+    padding-right: 40px;
 }
 
 .left-panel-item {
-    width: 100px;
+    /* width: 100px; */
+    color: #951b95;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .middle-panel {
     flex: 6 0 0;
     overflow: hidden;
     padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 30px;
+    padding-right: 15px;
+    padding-top: 40px;
 }
 
 .right-panel {
     flex: 2 0 0;
 }
 
-.notes-container {
-    /* flex: 6 0 0;
-    overflow: scroll;
-    margin-left: 15px; */
-}
-
 .left-panel-item button {
     background-color: white;
     color: black;
-    /* border: 2px solid #e7e7e7; */
     width: 100%;
-    text-align: left;
+    /* text-align: left; */
 }
 
 .left-panel-item button:hover {
@@ -129,18 +128,26 @@
     background-color: #e7e7e7;
 }
 
-#username {
-    color: #9b9ba5;
+.username {
+    color: #951b95;
     font-size: 12px;
 }
 
-#display-name {
+.notification .username {
+    cursor:pointer
+}
+
+.notification .displayname {
+    cursor:pointer
+}
+
+.displayname {
     margin-left: 5px;
-    color: #9e737b;
+    color: #951b95;
     font-size: 12px;
 }
 
-#note-age {
+.note-age {
     margin-left: 5px;
     font-size: 12px;
 }
@@ -216,6 +223,21 @@
     display: none;
 }
 
+.profile-page .child .note-container .profile-pic {
+    display: none;
+}
+
+.profile-page .parent .note-container .profile-pic {
+    height: 50px;
+    width: 50px;
+    border-radius: 70%;
+    margin-right: 20px;
+    cursor: pointer;
+    display: initial;
+    position: initial;
+    background-color: grey;
+}
+
 .profile-page .banner {
     text-align: center;
 }
@@ -227,8 +249,6 @@
     margin-right: 20px;
     margin-top: 15px;
     position: relative;
-    top: -90px;
-    left: 10px;
 }
 
 .profile-page .profile-pic-default {
@@ -243,11 +263,11 @@
     background-color: white
 }
 
-.profile-page #username {
+.profile-page .username {
     font-size: 45px;
 }
 
-.profile-page .note-container #username {
+.profile-page .note-container .username {
     display: none;
 }
 
@@ -258,16 +278,16 @@
 
 .profile-page .banner-pic-default {
     height: 200px;
-    background-color: rgba(218, 86, 26, 0.664);
+    background-color: rgba(74, 76, 169, 0.66)
 }
 
 .profile-page .profile-about {
     position: relative;
-    top: -40px;
     font-weight: bold;
     font-style: italic;
     padding-bottom: 20px;
     border-bottom: 1px solid grey;
+    margin-top:10px;
 }
 
 .search-box {
@@ -284,11 +304,19 @@
 .input-xo {
     width: 100%;
     border: none;
-    border-bottom: 2px solid gray
+    border-bottom: 2px solid black;
+    background-color: gray;
+    font-size: 20px;
 }
 
 .link-pic {
     max-width: 200px;
+}
+
+.link-video {
+    /* some arbitary numbers */
+    max-height:400px;
+    max-width:500px;
 }
 
 .follow-button {
@@ -303,8 +331,6 @@
     visibility: hidden;
 }
 
-.visible {}
-
 .load-next-container {
     text-align: center;
     margin-top: 20px;
@@ -316,8 +342,10 @@
     cursor: pointer;
     border: none;
     border-radius: 50%;
-    background: burlywood;
+    /* background: burlywood; */
     padding: 5px;
+    font-size:20px;
+    font-weight:bold;
 }
 
 .load-previous-container {
@@ -330,8 +358,10 @@
     cursor: pointer;
     border: none;
     border-radius: 50%;
-    background: burlywood;
+    /* background: burlywood; */
     padding: 5px;
+    font-size:20px;
+    font-weight:bold;
 }
 
 .embedded-profile {
@@ -372,5 +402,162 @@
 }
 
 .like-reaction {
+    color: black;
+    cursor: pointer;
+}
+
+.like-reaction-liked {
     color: purple;
+    cursor: pointer;
+}
+
+.dislike-reaction {
+    margin-left: 5px;
+}
+
+.other-reaction {
+    margin-left: 5px;
+}
+
+.hide-after-period {
+    animation: hide 5s linear 10s 1 forwards;
+}
+
+@keyframes hide {
+    100% {
+        opacity: 0;
+    }
+}
+
+.error {
+    color: red
+}
+
+.new-notes {
+    text-align: center;
+    position: sticky;
+    top: 20px;
+}
+
+.new-notes-count {
+    cursor: pointer;
+    border: none;
+    border-radius: 40%;
+    background: #815bd4;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.parent {
+    /* background-color: #baf1a6; */
+    display:flex
+}
+
+.child {
+    margin-left: 40px;
+}
+
+.parent-not-found {
+    border: 1px solid red;
+}
+
+.responseto-icon {
+    width: 18px;
+    top: 40px;
+    position: relative;
+    border-left: 2px solid black;
+    left: 24px;
+    border-top: 2px solid black;
+    margin-right: 24px;
+    margin-bottom: 40px;
+}
+
+#reply-text-area {
+    width: 100%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid black;
+    border-radius: 4px;
+    background-color: lightgray;
+    font-size: 16px;
+    resize: none;
+}
+
+.relays-grid {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto; /* 6 columns */
+}
+
+.reply-icon {
+    cursor: pointer;
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+.myprofile-edit input {
+    display: block;
+    padding: 5px;
+    margin-bottom: 5px;
+    width: 100%;
+    background-color: lightgray;
+}
+
+body {
+    background:gray;
+}
+
+.logged-in-profile {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top:20px;
+}
+
+.my-npub {
+    cursor: pointer;
+}
+
+.relay-action {
+    cursor: pointer;
+}
+
+.relay-connected {
+    color: #15ee15
+}
+
+.relay-disconnected {
+    color:#ee1f1f
+}
+
+.relay-active {
+    background-color: #15ee15;
+}
+
+.relay-inactive {
+    background-color: #ee1f1f;
+}
+
+.profile-relays {
+   font-size: 10px;
+   margin-top: 10px;
+}
+
+.profile-relays .relay-info {
+    margin-right: 5px;
+}
+
+.new-notifs-count {
+    color:#15ee15
+}
+
+.update-profile-button {
+    margin-bottom: 40px;
+}
+
+.back-button {
+    position:sticky;
+    top: 50px;
 }
