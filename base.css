@@ -17,7 +17,6 @@
     background: #d3d3d3a3;;
     border-radius: 15px;
     padding-left: 10px;
-    /* margin-bottom:10px; */
     border: 1px solid black;
     overflow:scroll;
 }
@@ -461,7 +460,6 @@
 }
 
 .parent {
-    /* background-color: #baf1a6; */
     display:flex;
     margin-bottom: 5px;
 }
