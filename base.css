@@ -17,8 +17,8 @@
     background: #d3d3d3a3;;
     border-radius: 15px;
     padding-left: 10px;
-    border: 1px solid black;
     overflow:scroll;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 .note-content {
@@ -335,6 +335,10 @@
     display: none;
 }
 
+.display-none {
+    display: none;
+}
+
 .invisible {
     visibility: hidden;
 }
@@ -583,9 +587,6 @@ body {
 .parent-child-complex {
     padding-left: 50px;
     padding-right: 50px;
-    border-bottom: 2px dashed #f73131;
-    padding-bottom: 15px;
-    padding-top: 15px;
 }
 
 .profile-follows {
@@ -631,3 +632,37 @@ body {
     color: purple;
     cursor:pointer;
 }
+
+.divider {
+    border-bottom: 1px dashed black;
+    margin: 10px;
+}
+
+.modal-window {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    margin: 15% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+    position: relative;
+    background: white;
+}
+
+ .close-btn {
+     background: #ff4757;
+     color: white;
+     border: none;
+     padding: 10px 20px;
+     border-radius: 5px;
+     cursor: pointer;
+     margin-top: 10px;
+ }
